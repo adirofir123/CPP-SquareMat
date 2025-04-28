@@ -6,77 +6,87 @@
 
 ---
 
-## 🧩 Overview
+## Overview
 
-This project implements a modular, fully tested C++ class `SquareMat` representing real-number **square matrices** with a wide range of operations via **operator overloading**.
+This project implements a modular, fully tested C++ class `SquareMat` representing real-number **square matrices** with a wide range of operations via **operator overloading**.  
+The matrix is internally managed with **dynamic memory allocation** (`new[]`, `delete[]`), **without** using STL containers (`vector`).
 
 ---
 
-## ✨ Features
+## Features
 
 - Arithmetic operators: `+`, `-`, `*`, `/`, `%`
 - Element-wise multiplication: `mat1 % mat2`
-- Scalar math: `mat * scalar`, `scalar * mat`
+- Scalar operations: `mat * scalar`, `scalar * mat`
 - Unary minus: `-mat`
-- Matrix power: `mat ^ int`
-- Transpose: `~mat`
-- Determinant: `!mat`
-- Equality & comparisons: `==`, `!=`, `<`, `>`, `<=`, `>=`
-- Increment / Decrement: `++`, `--` (pre and post)
-- Compound assignment: `+=`, `-=`, `*=`, `/=`, `%=` (matrix and scalar)
-- Output stream: `<<` to `std::ostream`
+- Matrix exponentiation: `mat ^ int`
+- Transpose operator: `~mat`
+- Determinant operator: `!mat`
+- Equality & comparison operators: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- Pre- and post-increment/decrement: `++`, `--`
+- Compound assignments: `+=`, `-=`, `*=`, `/=`, `%=` (with matrix or scalar)
+- Output stream operator: `<<` (printing matrix)
 - Bounds-checked access: `mat[i][j]`
 - Full test coverage with [doctest](https://github.com/doctest/doctest)
-- Memory safety tested via `valgrind`
+- Memory safety validated with `valgrind`
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 Project2/
-├── SquareMat.h        # Header file
-├── SquareMat.cpp      # Implementation
+├── SquareMat.h        # Class declaration (header)
+├── SquareMat.cpp      # Class implementation (dynamic memory)
 ├── main.cpp           # Demo executable
 ├── tests/
-│   └── test.cpp       # Unit tests (doctest.h included here)
-├── doctest.h          # Testing header
+│   ├── test.cpp       # Unit tests using doctest
+│   └── doctest.h      # Testing library
 ├── Makefile           # Build and test automation
-└── README.md          # You're here
+└── README.md          # This file
 ```
 
 ---
 
-## 🛠 Makefile Commands
+## Makefile Commands
 
 ```bash
 make Main       # Build and run main.cpp
 make test       # Compile and run tests with doctest
-make valgrind   # Run valgrind memory check on main
+make valgrind   # Run valgrind memory check on Main
 make clean      # Remove compiled files (Main, test, *.o)
 ```
 
 ---
 
-## ✅ Example Output
+## Example Output
 
-```bash
-Final Matrix:
-0 2 
-1 0 
-Determinant: -2
+```
+Matrix 1:
+1 2
+3 4
+
+Matrix 2:
+5 6
+7 8
+
+Sum:
+6 8
+10 12
+
+Product:
+19 22
+43 50
 ```
 
 ---
 
-## 💡 Notes
+## Notes
 
-- All matrix operations require matching sizes.
-- Throws `std::invalid_argument` on invalid input (e.g., division by 0, size mismatch).
-- Determinant calculation uses recursive expansion (efficient enough for small N).
+- All matrix operations require matrices of the same size.
+- Throws `std::invalid_argument` for invalid operations (e.g., division by zero, size mismatch).
+- Determinant calculation uses recursive Laplace expansion (suitable for small matrices, up to 4x4 or 5x5).
+- Manual memory management is carefully handled — project validated to have **zero memory leaks**.
 
 ---
 
-## 🚀 Done!
-
-Thanks for reading! Good luck with grading 😄
